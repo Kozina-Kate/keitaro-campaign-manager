@@ -74,3 +74,11 @@ class CreationResult(BaseModel):
     stream_ids: list[int] = Field(default_factory=list)
     error_code: str | None = None
     message: str
+
+
+class EditorChange(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    revision: int = Field(gt=0, strict=True)
+    offer_id: int | None = Field(default=None, gt=0, strict=True)
+    share: int | None = Field(default=None, ge=0, le=100, strict=True)

@@ -69,6 +69,8 @@ function showResult(data) {
   }
   setLink("admin-link", data.admin_url);
   setLink("campaign-link", data.status === "succeeded" ? data.campaign_url : null);
+  $("editor-link").hidden = data.status !== "succeeded";
+  if (data.status === "succeeded") $("editor-link").href = `/editor?campaign_id=${data.campaign_id}`;
   $("new").hidden = !["succeeded", "failed"].includes(data.status);
 }
 

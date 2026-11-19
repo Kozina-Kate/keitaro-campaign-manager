@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Редактор офферов · Keitaro Manager</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/editor.css">
+  <script src="/static/editor.js" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="/">K<span> / </span>Campaign Manager</a><nav><a href="/">Создать кампанию</a> · <a href="/docs">API ↗</a></nav></header>
+  <main>
+    <p class="eyebrow">KEITARO · РЕДАКТОР ОФФЕРОВ</p>
+    <h1>Управляйте составом.<br>Сохраняйте пропорции.</h1>
+    <p class="intro">Изменения сохраняются в черновике. Keitaro получит их только после нажатия «Опубликовать».</p>
+    <section class="card toolbar">
+      <form id="load-form"><label for="campaign-id">ID кампании</label><div class="load-row"><input id="campaign-id" type="number" min="1" step="1" required placeholder="Например, 215194"><button type="submit" id="fetch">Fetch · Загрузить из Keitaro</button></div></form>
+      <button id="refresh" type="button" class="secondary">Обновить сохранённое состояние</button>
+      <p class="hint">Редактирование тестовых кампаний с префиксом <code>test_kozina_</code>. Fetch не удаляет локальный архив. Неопубликованный черновик сначала отмените.</p>
+    </section>
+    <p id="editor-notice" class="notice" role="alert" hidden></p>
+    <p id="editor-success" class="success" role="status" hidden></p>
+    <section id="streams" aria-live="polite"><p class="empty-state">Загрузите кампанию по ID. Здесь появятся её потоки и офферы.</p></section>
+  </main>
+  <footer>Черновики и архив хранятся в SQLite · Публикация меняет только список офферов выбранного потока</footer>
+</body>
+</html>
