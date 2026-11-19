@@ -2,9 +2,8 @@ nav { font-size: 13px; }
 .toolbar { margin: 28px 0; }
 .toolbar form { margin: 0; }
 .toolbar label { margin-top: 0; }
-.load-row { display: flex; align-items: center; gap: 12px; }
-.load-row input { max-width: 220px; }
-.load-row button { background: #1b604d; color: white; }
+.load-row { display: grid; grid-template-columns: minmax(0, 220px) max-content; align-items: center; gap: 12px; }
+.load-row button { display: inline-flex; align-items: center; justify-content: center; height: 46px; margin: 0; padding: 0 16px; background: #1b604d; color: white; font-size: 13px; white-space: nowrap; }
 .stream { margin: 20px 0; padding: 24px; border: 1px solid #dae2d4; border-radius: 16px; background: white; }
 .stream.dirty { background: #fff9e5; border-color: #e8c96b; }
 .stream.locked { border-color: #d69d70; }
@@ -38,8 +37,7 @@ nav { font-size: 13px; }
 .stream-note { font-size: 13px; color: #718078; margin-bottom: 0; }
 @media(max-width:700px) {
   header { gap: 20px; flex-wrap: wrap; }
-  .load-row { flex-direction: column; align-items: stretch; }
-  .load-row input { max-width: none; }
+  .load-row { grid-template-columns: minmax(0, 1fr); }
   .stream { padding: 18px; }
   .offer-row { grid-template-columns: minmax(0,1fr) 70px; }
   .offer-name { grid-column: 1; }
