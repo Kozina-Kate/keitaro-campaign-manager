@@ -113,6 +113,10 @@ def test_migrations_and_database_readiness(tmp_path, monkeypatch):
     app = create_app(settings(database_url=url))
     with TestClient(app) as client:
         assert client.get("/health").status_code == 503
+        command.upgrade(config, "0001")
+        assert client.get("/health").status_code == 503
+        command.upgrade(config, "0002")
+        assert client.get("/health").status_code == 503
         command.upgrade(config, "head")
         assert client.get("/health").json() == {"status": "ok"}
         command.check(config)

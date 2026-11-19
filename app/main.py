@@ -6,7 +6,7 @@ from uuid import UUID
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from sqlalchemy import func, select
+from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm.exc import StaleDataError
 
@@ -15,7 +15,7 @@ from app.config import Settings
 from app.database import build_database
 from app.editor import CampaignEditor, EditorError
 from app.keitaro import KeitaroClient, KeitaroError
-from app.models import Operation
+from app.models import EditorOffer, EditorStream, Operation
 from app.schemas import CampaignCreate, CreationResult, EditorChange, ReferenceData
 
 
@@ -103,7 +103,9 @@ def create_app(settings: Settings | None = None, transport=None) -> FastAPI:
     def health():
         try:
             with sessions() as session:
-                session.scalar(select(func.count()).select_from(Operation))
+                # LIMIT 0 проверяет все нужные столбцы без чтения записей.
+                for model in (Operation, EditorStream, EditorOffer):
+                    session.execute(select(model).limit(0))
         except SQLAlchemyError:
             return JSONResponse(
                 status_code=503,
