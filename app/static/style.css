@@ -3,10 +3,10 @@
 select {
   appearance: none;
   -webkit-appearance: none;
-  padding-right: 40px;
+  padding-right: 50px;
   background-image: url("/static/select-chevron.svg");
   background-repeat: no-repeat;
-  background-position: right 14px center;
+  background-position: right 24px center;
   background-size: 12px 8px;
 }
 @media (forced-colors: active) {
