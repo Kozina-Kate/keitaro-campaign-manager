@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Создание кампании · Keitaro Manager</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="/">K<span> / </span>Campaign Manager</a><a href="/docs">API ↗</a></header>
+  <main>
+    <p class="eyebrow">KEITARO · СОЗДАНИЕ КАМПАНИИ</p>
+    <h1>Два потока.<br>Одна новая кампания.</h1>
+    <p class="intro">Укажите страну и оффер. Посетители из выбранной страны перейдут на Google, остальные — на оффер.</p>
+    <div class="layout">
+      <section class="card">
+        <div class="card-heading"><h2>Настройки кампании</h2><span id="connection" role="status">Подключение…</span></div>
+        <form id="campaign-form">
+          <fieldset id="fields" disabled>
+            <label for="name">Название кампании</label>
+            <input id="name" name="name" required maxlength="255" placeholder="test_kozina_campaign1" pattern="test_kozina_.+">
+            <p class="hint">Обязательный префикс: <code>test_kozina_</code></p>
+            <div class="row">
+              <div><label for="country">Код страны</label><input id="country" name="country_code" required minlength="2" maxlength="2" pattern="[A-Za-z]{2}" placeholder="AU" autocomplete="off"></div>
+              <div><label for="offer">Оффер · ID и название</label><select id="offer" name="offer_id" required></select></div>
+            </div>
+            <label for="domain">Домен</label><select id="domain" name="domain_id" required></select>
+            <div class="row">
+              <div><label for="group">Группа кампаний</label><select id="group" name="group_id" required></select></div>
+              <div><label for="source">Источник трафика</label><select id="source" name="traffic_source_id" required></select></div>
+            </div>
+            <button id="create" type="submit">Создать кампанию <span aria-hidden="true">↗</span></button>
+          </fieldset>
+        </form>
+        <button id="reload" class="secondary" type="button" hidden>Повторить подключение</button>
+        <p id="notice" role="alert" class="notice" hidden></p>
+      </section>
+      <aside>
+        <section class="flow">
+          <p class="eyebrow">МАРШРУТ ПОСЕТИТЕЛЯ</p>
+          <div class="step"><span class="number">01</span><div><h3>Выбранная страна</h3><p>Фильтр по гео → Google</p></div></div>
+          <div class="connector"></div>
+          <div class="step"><span class="number">02</span><div><h3>Все остальные</h3><p>Выбранный оффер · 100% трафика</p></div></div>
+          <p class="hint">Потоки проверяются по порядку. Кампания включается после проверки настроек.</p>
+        </section>
+        <section id="result" class="result" aria-live="polite" hidden>
+          <p class="eyebrow" id="result-status"></p><h2 id="result-title"></h2>
+          <p id="result-message"></p><dl id="result-details"></dl>
+          <a id="admin-link" target="_blank" rel="noopener noreferrer" hidden>Открыть в Keitaro ↗</a>
+          <a id="campaign-link" target="_blank" rel="noopener noreferrer" hidden>Ссылка кампании ↗</a>
+          <button id="check" class="secondary" type="button">Проверить статус</button>
+          <button id="new" class="secondary" type="button" hidden>Новая кампания</button>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <footer>FastAPI + SQLAlchemy · Изменения выполняются через Keitaro Admin API</footer>
+</body>
+</html>
