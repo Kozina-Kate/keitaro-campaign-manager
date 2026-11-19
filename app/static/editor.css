@@ -2,8 +2,9 @@ nav { font-size: 13px; }
 .toolbar { margin: 28px 0; }
 .toolbar form { margin: 0; }
 .toolbar label { margin-top: 0; }
-.load-row { display: grid; grid-template-columns: minmax(0, 220px) max-content; align-items: center; gap: 12px; }
-.load-row button { display: inline-flex; align-items: center; justify-content: center; height: 46px; margin: 0; padding: 0 16px; background: #1b604d; color: white; font-size: 13px; white-space: nowrap; }
+.load-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 12px; }
+.load-row button { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-width: 0; height: 46px; margin: 0; padding: 0 12px; font-size: 13px; line-height: 1.25; white-space: normal; }
+.load-row #fetch { background: #1b604d; color: white; }
 .stream { margin: 20px 0; padding: 24px; border: 1px solid #dae2d4; border-radius: 16px; background: white; }
 .stream.dirty { background: #fff9e5; border-color: #e8c96b; }
 .stream.locked { border-color: #d69d70; }
